@@ -8,7 +8,9 @@ import (
 
 func main() {
 
-	go delaytaskwatcher.Watch()
+	go delaytaskwatcher.Watch(delaytaskwatcher.Options{
+		Limit: 10 *time.Second,
+	})
 
 	heavyTask()
 
