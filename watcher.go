@@ -11,9 +11,18 @@ var logger = log.Printf
 
 const thresholdTerm = 3 * time.Second
 
-func Watch() {
-	time.AfterFunc(thresholdTerm, func() {
-		logger("task process time error: %s has passed", thresholdTerm)
+type Options struct {
+	Limit time.Duration
+}
+
+func Watch(opt ...Options) {
+	term := thresholdTerm
+	if len(opt) > 0 {
+		term = opt[0].Limit
+	}
+
+	time.AfterFunc(term, func() {
+		logger("task process time error: %s has passed", term)
 		_ = pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
 	})
 }
