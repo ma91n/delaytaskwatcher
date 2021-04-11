@@ -8,9 +8,10 @@ import (
 
 func main() {
 
-	go delaytaskwatcher.Watch(delaytaskwatcher.Options{
-		Limit: 10 *time.Second,
+	stopFunc := delaytaskwatcher.Watch(delaytaskwatcher.Options{
+		Limit: 10 * time.Second,
 	})
+	defer stopFunc()
 
 	heavyTask()
 
@@ -23,5 +24,5 @@ func heavyTask() {
 }
 
 func heavyTaskMain() {
-	time.Sleep(30 * time.Second)
+	time.Sleep(15 * time.Second)
 }
