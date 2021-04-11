@@ -27,6 +27,7 @@ type Options struct {
 	// default is 1.
 	Debug *int
 
+	// NOW DEVELOP OPTION!
 	// 出力対象のGoroutineID
 	TargetGoID *int
 }
